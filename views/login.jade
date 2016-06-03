@@ -1,0 +1,46 @@
+extends ./layouts/one_column
+
+block styles
+  include ./includes/_styles
+  link(rel='stylesheet', href='stylesheets/login.css')
+
+block body
+  body.primaryBackground
+    .mdl-grid
+      .mdl-layout-spacer
+      .mdl-cell.mdl-cell--4-col
+        .anonymous
+          a(href='/')
+            img(src='/', width='80', height='80')
+
+          .form
+            .mdl-card.mdl-shadow--2dp
+              .mdl-card__supporting-text.cardTitle
+                span.mdl-typography--title Access your Dashboard
+                //- span.mdl-typography--title Reset your password
+              .mdl-card__supporting-text.mdl-card--expand
+                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                  input#email.mdl-textfield__input(type='email')
+                  label.mdl-textfield__label(for='email') Email
+                //- span
+                //-   | That's okay. Enter your email and we'll send you a way to reset your password.
+                .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                  input#password.mdl-textfield__input(type='password')
+                  label.mdl-textfield__label(for='password') Password
+              .mdl-card__actions.mdl-card--border
+                a.mdl-button.mdl-js-button.cardActionButton
+                  | Forgot something?
+                //- a.mdl-button.mdl-js-button.cardActionButton
+                //-   | Never mind, go back
+
+            a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.mdl-js-ripple-effect.primaryButton
+              | Log In
+            //- a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.mdl-js-ripple-effect.loginButton
+            //-   | Reset Password
+
+            a.mdl-button.mdl-js-button.secondaryButton
+              | I don't have an account 😕
+
+      .mdl-layout-spacer
+
+    script(defer='', src='//code.getmdl.io/1.1.3/material.min.js')

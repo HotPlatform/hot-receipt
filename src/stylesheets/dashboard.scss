@@ -1,0 +1,80 @@
+// remove this after use
+.primaryBackground {
+  background-color: #dedede;
+  height: 50px;
+}
+
+@import 'global.scss';
+
+// common stuff
+.indigo500 {
+  color: #3F51B5;
+  background-color: #3F51B5;
+}
+.deepPurple500 {
+  color: #673AB7;
+  background-color: #673AB7;
+}
+.purple500 {
+  color: #9C27B0;
+  background-color: #9C27B0;
+}
+.pink500 {
+  color: #E91E63;
+  background-color: #E91E63;
+}
+.deepOrange500 {
+  color: #FF5722;
+  background-color: #FF5722;
+}
+.teal500 {
+  color: #009688;
+  background-color: #009688;
+}
+.yellow500 {
+  color: #FFEB3B;
+  background-color: #FFEB3B;
+}
+
+// $green500: #4CAF50;
+// $blue500: #2196F3;
+// $red500: #F44336;
+// $amber500: #FFC107;
+// $blueGrey50: #ECEFF1;
+// $blueGrey900: #263238;
+//
+// $primaryDarkText: rgba(255,255,255,.87);
+// $secondaryDarkText: rgba(255,255,255,.54);
+
+// custom stuff
+
+.miniStats {
+  width: 100%;
+  min-height: 64px;
+
+  &.green {
+    background-color: $green500;
+  }
+
+  &.blue {
+    background-color: $blue500;
+  }
+
+  &.red {
+    background-color: $red500;
+  }
+
+  &.amber {
+    background-color: $amber500;
+  }
+
+  .key {
+    color: $secondaryDarkText;
+  }
+
+  .value {
+    color: $primaryDarkText;
+    margin-top: 10px;
+    margin-bottom: 3px;
+  }
+}

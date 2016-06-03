@@ -1,0 +1,24 @@
+.primaryBackground {
+  background: #3F51B5; }
+
+.anonymous {
+  margin-top: 50px;
+  text-align: center;
+  width: 330px; }
+  .anonymous .form {
+    margin-top: 50px; }
+    .anonymous .form .cardTitle {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    .anonymous .form .cardActionButton {
+      color: rgba(0, 0, 0, 0.32);
+      display: block;
+      text-transform: none; }
+    .anonymous .form .primaryButton {
+      display: block;
+      margin-top: 16px; }
+    .anonymous .form .secondaryButton {
+      color: rgba(255, 255, 255, 0.64);
+      display: block;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      text-transform: none; }

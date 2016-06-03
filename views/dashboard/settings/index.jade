@@ -1,0 +1,37 @@
+extends ../../layouts/dashboard
+
+block styles
+  include ../../includes/_styles
+  link(rel='stylesheet', href='/stylesheets/settings.css')
+
+block content
+  include ../../includes/_sidebar
+
+    block main
+      .mdl-grid
+        .mdl-layout-spacer
+
+        .mdl-cell.mdl-cell--6-col.mdl-card.mdl-shadow--2dp
+          .mdl-card__title
+            h4.mdl-card__title-text Profile
+          .mdl-card__supporting-text
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#logo.mdl-textfield__input
+              label.mdl-textfield__label(for='logo') Logo
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#email.mdl-textfield__input
+              label.mdl-textfield__label(for='brand') Brand Name
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#company.mdl-textfield__input
+              label.mdl-textfield__label(for='company') Company Name
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#address.mdl-textfield__input
+              label.mdl-textfield__label(for='address') Address
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#phone.mdl-textfield__input
+              label.mdl-textfield__label(for='phone') Customer Careline
+
+          a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.mdl-js-ripple-effect.primaryButton
+            | Update
+
+        .mdl-layout-spacer

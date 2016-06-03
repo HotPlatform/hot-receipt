@@ -1,0 +1,159 @@
+extends ../layouts/dashboard
+
+block styles
+  include ../includes/_styles
+  link(rel='stylesheet', href='stylesheets/dashboard.css')
+
+block content
+  include ../includes/_sidebar
+
+    block main
+      .mdl-grid
+
+        // total stats
+        .mdl-cell.mdl-cell--3-col
+          .mdl-card.mdl-shadow--2dp.miniStats.red
+            .mdl-card__supporting-text
+              span.key Revenue
+              h6.value $
+                span.mdl-typography--display-1 1,234,567
+        .mdl-cell.mdl-cell--3-col
+          .mdl-card.mdl-shadow--2dp.miniStats.amber
+            .mdl-card__supporting-text
+              span.key Sales
+              h6.value
+                span.mdl-typography--display-1 1,234,567
+        .mdl-cell.mdl-cell--3-col
+          .mdl-card.mdl-shadow--2dp.miniStats.green
+            .mdl-card__supporting-text
+              span.key New customer
+              h6.value 
+                span.mdl-typography--display-1 1,234,567
+        .mdl-cell.mdl-cell--3-col
+          .mdl-card.mdl-shadow--2dp.miniStats.blue
+            .mdl-card__supporting-text
+              span.key Repeat customer
+              h6.value
+                span.mdl-typography--display-1 1,234,567
+
+        // charts
+        .mdl-cell.mdl-cell--8-col
+          .mdl-card.mdl-shadow--2dp(style='width:100%;')
+            #salesChart
+        .mdl-cell.mdl-cell--4-col
+          .mdl-card.mdl-shadow--2dp
+            #customerPie
+
+        // tables
+        .mdl-cell.mdl-cell--6-col
+          #comparison
+        .mdl-cell.mdl-cell--6-col
+          #activityLog
+          
+  script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js')
+  script(type='text/javascript', src='//www.gstatic.com/charts/loader.js')
+  script(type='text/javascript').
+    google.charts.load('current', {'packages':['bar', 'table', 'corechart']});
+    
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data3 = google.visualization.arrayToDataTable([
+        ['Year', 'Sales', 'Expenses', 'Profit'],
+        ['2014', 1000, 400, 200],
+        ['2015', 1170, 460, 250],
+        ['2016', 660, 1120, 300],
+        ['2017', 1030, 540, 350]
+      ]);
+      var options3 = {
+        chart: {
+          title: 'Company Performance',
+          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+        },
+      };
+      var chart = new google.charts.Bar(document.getElementById('salesChart'));
+      chart.draw(data3, options3);
+    }
+    
+    google.charts.setOnLoadCallback(drawPie);
+    function drawPie() {
+      var data4 = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['Work',     11],
+        ['Eat',      2],
+        ['Commute',  2],
+        ['Watch TV', 2],
+        ['Sleep',    7]
+      ]);
+      var options4 = {
+        title: 'My Daily Activities',
+        pieHole: 0.4,
+      };
+      var piechart = new google.visualization.PieChart(document.getElementById('customerPie'));
+      piechart.draw(data4, options4);
+    }
+    
+    var cssClassNames = {
+      'headerRow': ' ',
+      'tableRow': ' ',
+      'oddTableRow': ' ',
+      'selectedTableRow': ' ',
+      'hoverTableRow': ' ',
+      'headerCell': '.mdl-data-table__cell--non-numeric',
+      'tableCell': '.mdl-data-table__cell--non-numeric',
+      'rowNumberCell': ' '
+    };
+    var options2 = {
+      width: '100%',
+      height: '100%',
+      allowHtml: false,
+      alternatingRowStyle: false,
+      cssClassNames: cssClassNames,
+      enableInteractivity: false,
+      sort: 'disable'
+    };
+    
+    
+    google.charts.setOnLoadCallback(drawTable);
+    function drawTable() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Activities');
+      data.addRows([
+      ['You logged in 9 hours ago.'],
+      ['You updated your company profile in 3 hours ago.'],
+      ['You changed your password in 3 hours ago.'],
+      ['You joined since 2 hours ago.']
+      ]);
+      var table = new google.visualization.Table(document.getElementById('activityLog'));
+      google.visualization.events.addListener(table, 'ready', function(){
+        // normalize to md
+        $('.google-visualization-table').children('div').css('overflow', 'inherit');
+        $('.google-visualization-table').removeClass('google-visualization-table');
+        $('.google-visualization-table-table').addClass('mdl-data-table mdl-js-data-table mdl-shadow--2dp');
+        $('.google-visualization-table-table').removeClass('google-visualization-table-table');
+      });
+      table.draw(data, options2);
+    }
+    
+    google.charts.setOnLoadCallback(drawTable2);
+    function drawTable2() {
+      var data2 = new google.visualization.DataTable();
+      data2.addColumn('string', 'Subjects');
+      data2.addColumn('number', 'Value');
+      data2.addColumn('number', 'Diff');
+      data2.addRows([
+      ['Revenue',  {v: 1234567, f: '$1,234,567'}, {v: 1234, f: '12.34 %'}],
+      ['Sales',   {v: -1234567,   f: '- 1,234,567'},  {v: -1234, f: '- 12.34 %'}],
+      ['New customer', {v: 1234567, f: '1,234,567'}, {v: 1234, f: '12.34 %'}],
+      ['Repeat customer',   {v: -1234567,  f: '- 1,234,567'},  {v: -1234, f: '- 12.34 %'}]
+      ]);
+      var container = document.getElementById('comparison');
+      var table2 = new google.visualization.Table(container);
+      google.visualization.events.addListener(table2, 'ready', function(){
+        // normalize to md
+        $('.google-visualization-table').children('div').css('overflow', 'inherit');
+        $('.google-visualization-table').removeClass('google-visualization-table');
+        $('.google-visualization-table-table').addClass('mdl-data-table mdl-js-data-table mdl-shadow--2dp');
+        $('.google-visualization-table-table').removeClass('google-visualization-table-table');
+      });
+      table2.draw(data2, options2);
+    }

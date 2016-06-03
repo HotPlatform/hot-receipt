@@ -1,0 +1,55 @@
+.primaryBackground {
+  background-color: #dedede;
+  height: 50px; }
+
+body {
+  background-color: #ECEFF1; }
+
+.sidebar {
+  background-color: #263238; }
+
+.indigo500 {
+  color: #3F51B5;
+  background-color: #3F51B5; }
+
+.deepPurple500 {
+  color: #673AB7;
+  background-color: #673AB7; }
+
+.purple500 {
+  color: #9C27B0;
+  background-color: #9C27B0; }
+
+.pink500 {
+  color: #E91E63;
+  background-color: #E91E63; }
+
+.deepOrange500 {
+  color: #FF5722;
+  background-color: #FF5722; }
+
+.teal500 {
+  color: #009688;
+  background-color: #009688; }
+
+.yellow500 {
+  color: #FFEB3B;
+  background-color: #FFEB3B; }
+
+.miniStats {
+  width: 100%;
+  min-height: 64px; }
+  .miniStats.green {
+    background-color: #4CAF50; }
+  .miniStats.blue {
+    background-color: #2196F3; }
+  .miniStats.red {
+    background-color: #F44336; }
+  .miniStats.amber {
+    background-color: #FFC107; }
+  .miniStats .key {
+    color: rgba(255, 255, 255, 0.54); }
+  .miniStats .value {
+    color: rgba(255, 255, 255, 0.87);
+    margin-top: 10px;
+    margin-bottom: 3px; }

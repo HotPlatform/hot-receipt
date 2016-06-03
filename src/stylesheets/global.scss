@@ -1,0 +1,18 @@
+$green500: #4CAF50;
+$blue500: #2196F3;
+$red500: #F44336;
+$amber500: #FFC107;
+$blueGrey50: #ECEFF1;
+$blueGrey900: #263238;
+
+$primaryDarkText: rgba(255,255,255,.87);
+$secondaryDarkText: rgba(255,255,255,.54);
+
+
+body {
+  background-color: $blueGrey50;
+}
+
+.sidebar {
+  background-color: $blueGrey900;
+}
