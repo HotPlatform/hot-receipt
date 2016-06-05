@@ -5,20 +5,22 @@ var fakeInput = { sales: 100 };
 
 router.get('/', function(req, res, next) {
   validate(fakeInput).then(function() {
-    console.log('run these in parallel');
+    // FIXME parallel not ideal because one fail doesnt affect the rest - try batch
     var promises = [];
     promises.push(createHourReport(fakeInput));
     promises.push(sendReceipt(fakeInput));
     return Parse.Promise.when(promises);
   }).then(function() {
     res.send('It works!');
+  }, function(err) {
+    res.send(err);
   });
 });
 
 var sendReceipt = function(input) {
   var promise = new Parse.Promise();
   console.log('sendReceipt')
-  promise.resolve();
+  promise.reject('failed in sendReceipt');
   return promise;
 };
 
