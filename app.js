@@ -50,6 +50,9 @@ app.use('/', routes);
 const receiptController = require('./lib/controllers/ReceiptController');
 app.get('/api/receipt', receiptController.create); // TODO change method to POST
 
+const promiseController = require('./lib/controllers/PromiseController');
+app.use('/api/promise', promiseController);
+
 var parse = new ParseServer({
   databaseURI: 'mongodb://localhost:27017', // Connection string for your MongoDB database
   // cloud: '/home/myApp/cloud/main.js', // Absolute path to your Cloud Code
