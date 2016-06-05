@@ -39,12 +39,16 @@ app.use(
 app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 app.use('/', routes);
-app.use('/dashboard', dashboard);
-app.use('/dashboard/settings', settings);
+// app.use('/dashboard', dashboard);
+// app.use('/dashboard/settings', settings);
 // app.use('/api', api);
 
-const apiController = require('./src/controllers/ApiController');
-app.post('/api', apiController.postReceiptRequest);
+// TODO throw this
+// const apiController = require('./src/controllers/ApiController');
+// app.post('/api', apiController.postReceiptRequest);
+
+const receiptController = require('./lib/controllers/ReceiptController');
+app.get('/api/receipt', receiptController.create); // TODO change method to POST
 
 var parse = new ParseServer({
   databaseURI: 'mongodb://localhost:27017', // Connection string for your MongoDB database
@@ -87,10 +91,10 @@ var pd = new ParseDashboard({
 
 app.use('/pd', pd);
 
-var ReceiptPrinter = require('./lib/ReceiptPrinter');
-var rp = new ReceiptPrinter();
-rp.generateObjectId();
-console.log(rp.generateMetadata());
+// var ReceiptPrinter = require('./lib/ReceiptPrinter');
+// var rp = new ReceiptPrinter();
+// rp.generateObjectId();
+// console.log(rp.generateMetadata());
 
 // var kue = require('kue')
 //   , queue = kue.createQueue();
@@ -112,17 +116,17 @@ console.log(rp.generateMetadata());
 //   console.log('You will see this message every second');
 // }
 
-var kue = require('kue');
-var ui = require('kue-ui');
-
-ui.setup({
-  apiURL: '/kue-api', // IMPORTANT: specify the api url
-  baseURL: '/kue', // IMPORTANT: specify the base url
-  updateInterval: 50000000 // Optional: Fetches new data every 5000 ms
-});
-
-app.use('/kue-api', kue.app);
-app.use('/kue', ui.app);
+// var kue = require('kue');
+// var ui = require('kue-ui');
+//
+// ui.setup({
+//   apiURL: '/kue-api', // IMPORTANT: specify the api url
+//   baseURL: '/kue', // IMPORTANT: specify the base url
+//   updateInterval: 50000000 // Optional: Fetches new data every 5000 ms
+// });
+//
+// app.use('/kue-api', kue.app);
+// app.use('/kue', ui.app);
 
 
 // catch 404 and forward to error handler
