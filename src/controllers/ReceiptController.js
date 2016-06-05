@@ -32,6 +32,7 @@ const _receipt = {
 
 const _hourly = {
   tag: 'bra_juwEhBi/hourly/20160601',
+  date: 20160601,
   metadata: {
     brand_id: 'bra_juwEhBi',
     brand_name: 'McDonalds',
