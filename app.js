@@ -50,8 +50,8 @@ app.use('/', routes);
 const receiptController = require('./lib/controllers/ReceiptController');
 app.get('/api/receipt', receiptController.create); // TODO change method to POST
 
-const promiseController = require('./lib/routes/ReceiptRoute');
-app.use('/api/promise', promiseController);
+const receiptApi = require('./lib/routes/ReceiptRoute');
+app.use('/api/receipt', receiptApi);
 
 var parse = new ParseServer({
   databaseURI: 'mongodb://localhost:27017', // Connection string for your MongoDB database
