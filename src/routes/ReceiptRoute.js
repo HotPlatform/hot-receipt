@@ -1,12 +1,14 @@
 'use strict'
 
+const HourlyReporter = require('../HourlyReporter');
+
 const fakeInput = { sales: 100 };
 
 export function create(req, res, next) {
   validate(fakeInput).then(() => {
     // FIXME parallel not ideal because one fail doesnt affect the rest - try batch
     const promises = [];
-    promises.push(createHourReport(fakeInput));
+    promises.push(HourlyReporter.create(fakeInput));
     promises.push(sendReceipt(fakeInput));
     return Parse.Promise.when(promises);
   }).then(() => {
@@ -23,12 +25,12 @@ var sendReceipt = function(input) {
   return promise;
 };
 
-var createHourReport = function(input) {
-  var promise = new Parse.Promise();
-  console.log('createHourReport')
-  promise.resolve();
-  return promise;
-};
+// var createHourReport = function(input) {
+//   var promise = new Parse.Promise();
+//   console.log('createHourReport')
+//   promise.resolve();
+//   return promise;
+// };
 
 var validate = function(input) {
   var promise = new Parse.Promise();
