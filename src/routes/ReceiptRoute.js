@@ -1,17 +1,34 @@
-var express = require('express');
-var router = express.Router();
-
-var fakeInput = { sales: 100 };
 
 exports.create = (req, res, next) => {
   res.send('create');
 }
 
 exports.retrieve = (req, res, next) => {
-  // validate the only receiptId in the path
-  res.send('retrieve');
+  var receiptId = req.params.id;
+
+  if (!receiptId) {
+    return res.render('login');
+  }
+
+  const Receipt = Parse.Object.extend('Receipt');
+  const query = new Parse.Query(Receipt);
+  query.equalTo('objectId', receiptId);
+
+  // TODO setup receipt & receipt not found pages
+  query.first().then((result) => {
+    if (result) {
+      return res.render('index', { data: result });
+    } else {
+      return res.render('login');
+    }
+  });
 }
 
+// var express = require('express');
+// var router = express.Router();
+//
+// var fakeInput = { sales: 100 };
+//
 // router.get('/', function(req, res, next) {
 //   validate(fakeInput).then(function() {
 //     // FIXME parallel not ideal because one fail doesnt affect the rest - try batch
