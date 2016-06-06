@@ -1,7 +1,45 @@
+'use strict'
+
+const fakeInput = { sales: 100 };
 
 export function create(req, res, next) {
-  res.send('create');
+  validate(fakeInput).then(() => {
+    // FIXME parallel not ideal because one fail doesnt affect the rest - try batch
+    const promises = [];
+    promises.push(createHourReport(fakeInput));
+    promises.push(sendReceipt(fakeInput));
+    return Parse.Promise.when(promises);
+  }).then(() => {
+    res.send('create');
+  }, err => {
+    res.send(err);
+  });
 }
+
+var sendReceipt = function(input) {
+  var promise = new Parse.Promise();
+  console.log('sendReceipt')
+  promise.reject('failed in sendReceipt');
+  return promise;
+};
+
+var createHourReport = function(input) {
+  var promise = new Parse.Promise();
+  console.log('createHourReport')
+  promise.resolve();
+  return promise;
+};
+
+var validate = function(input) {
+  var promise = new Parse.Promise();
+  console.log('validate');
+  if (input.sales) {
+    promise.resolve();
+  } else {
+    promise.reject();
+  }
+  return promise;
+};
 
 export function retrieve(req, res, next) {
   const receiptId = req.params.id;
@@ -23,50 +61,3 @@ export function retrieve(req, res, next) {
     }
   });
 }
-
-// var express = require('express');
-// var router = express.Router();
-//
-// var fakeInput = { sales: 100 };
-//
-// router.get('/', function(req, res, next) {
-//   validate(fakeInput).then(function() {
-//     // FIXME parallel not ideal because one fail doesnt affect the rest - try batch
-//     var promises = [];
-//     promises.push(createHourReport(fakeInput));
-//     promises.push(sendReceipt(fakeInput));
-//     return Parse.Promise.when(promises);
-//   }).then(function() {
-//     res.send('It works!');
-//   }, function(err) {
-//     res.send(err);
-//   });
-// });
-//
-// var sendReceipt = function(input) {
-//   var promise = new Parse.Promise();
-//   console.log('sendReceipt')
-//   promise.reject('failed in sendReceipt');
-//   return promise;
-// };
-//
-// var createHourReport = function(input) {
-//   var promise = new Parse.Promise();
-//   console.log('createHourReport')
-//   promise.resolve();
-//   return promise;
-// };
-//
-// var validate = function(input) {
-//   var promise = new Parse.Promise();
-//   console.log('validate');
-//   if (input.sales) {
-//     promise.resolve();
-//   } else {
-//     promise.reject();
-//   }
-//   return promise;
-// };
-//
-//
-// module.exports = router;
