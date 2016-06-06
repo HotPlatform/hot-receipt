@@ -50,7 +50,7 @@ app.use('/', routes);
 const receiptController = require('./lib/controllers/ReceiptController');
 app.get('/api/receipt', receiptController.create); // TODO change method to POST
 
-const promiseController = require('./lib/controllers/PromiseController');
+const promiseController = require('./lib/routes/ReceiptRoute');
 app.use('/api/promise', promiseController);
 
 var parse = new ParseServer({
