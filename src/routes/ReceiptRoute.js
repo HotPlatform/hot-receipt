@@ -1,10 +1,10 @@
 
-exports.create = (req, res, next) => {
+export function create(req, res, next) {
   res.send('create');
 }
 
-exports.retrieve = (req, res, next) => {
-  var receiptId = req.params.id;
+export function retrieve(req, res, next) {
+  const receiptId = req.params.id;
 
   if (!receiptId) {
     return res.render('login');
