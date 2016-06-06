@@ -1,6 +1,7 @@
-'use strict'
+'use strict';
 
 const HourlyReporter = require('../HourlyReporter');
+const ReceiptPrinter = require('../ReceiptPrinter');
 
 const fakeInput = { sales: 100 };
 
@@ -9,21 +10,21 @@ export function create(req, res, next) {
     // FIXME parallel not ideal because one fail doesnt affect the rest - try batch
     const promises = [];
     promises.push(HourlyReporter.create(fakeInput));
-    promises.push(sendReceipt(fakeInput));
+    promises.push(ReceiptPrinter.sendEmail(fakeInput));
     return Parse.Promise.when(promises);
   }).then(() => {
-    res.send('create');
+    res.send('created');
   }, err => {
     res.send(err);
   });
 }
 
-var sendReceipt = function(input) {
-  var promise = new Parse.Promise();
-  console.log('sendReceipt')
-  promise.reject('failed in sendReceipt');
-  return promise;
-};
+// var sendReceipt = function(input) {
+//   var promise = new Parse.Promise();
+//   console.log('sendReceipt')
+//   promise.reject('failed in sendReceipt');
+//   return promise;
+// };
 
 // var createHourReport = function(input) {
 //   var promise = new Parse.Promise();
