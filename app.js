@@ -47,11 +47,16 @@ app.use('/', routes);
 // const apiController = require('./src/controllers/ApiController');
 // app.post('/api', apiController.postReceiptRequest);
 
-const receiptController = require('./lib/controllers/ReceiptController');
-app.get('/api/receipt', receiptController.create); // TODO change method to POST
+// const receiptController = require('./lib/controllers/ReceiptController');
+// app.get('/api/receipt', receiptController.create); // TODO change method to POST
 
-const receiptApi = require('./lib/routes/ReceiptRoute');
-app.use('/api/receipt', receiptApi);
+// TODO validate /api path with api key
+// TODO validate content type
+// TODO validate req/sec
+
+const receipt = require('./lib/routes/ReceiptRoute');
+app.get('/api/receipts', receipt.create);// TODO change method to POST
+app.get('/receipts', receipt.retrieve);
 
 var parse = new ParseServer({
   databaseURI: 'mongodb://localhost:27017', // Connection string for your MongoDB database
