@@ -11,10 +11,9 @@ const ReceiptPrinter  = require('../ReceiptPrinter');
 export function create(req, res, next) {
   const input = req.body;
 
-  ReceiptManager.validate(input).then(() => {
-    // FIXME parallel not ideal because one fail doesnt affect the rest - try batch
+  ReceiptManager.create(input).then(receipt => {
+    // Statuses of parellel processes are ignorable.
     const promises = [];
-    promises.push(ReceiptManager.create(input));
     promises.push(HourlyReporter.create(input));
     promises.push(DailyReporter.create(input));
     promises.push(WeeklyReporter.create(input));
@@ -22,11 +21,12 @@ export function create(req, res, next) {
     promises.push(YearlyReporter.create(input));
     promises.push(ReceiptPrinter.sendEmail(input));
     return Parse.Promise.when(promises);
-  }).then(receipt => {
-    res.send('created');
+  }).then(() => {
+    res.status(201).send('Created');
   }, err => {
-    // TODO handle errors
-    res.send(err);
+    // This should handle the error of ReceiptManager.create()
+    // because parallel processes will not throw any errors.
+    res.status(err.type).send(err.message);
   });
 }
 
