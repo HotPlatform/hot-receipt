@@ -8,11 +8,31 @@ const MonthlyReporter = require('../MonthlyReporter');
 const YearlyReporter  = require('../YearlyReporter');
 const ReceiptPrinter  = require('../ReceiptPrinter');
 
-import Postman from '../Postman';
+const nodemailer = require('nodemailer');
 
-export function create(req, res, next) {
-  const pm = new Postman();
-  pm.sayName();
+// import Postman from '../Postman';
+// const pm = new Postman();
+// pm.sayName();
+
+export function create(req, res) {
+
+  // ========= Sending mail =============
+  const transporter = nodemailer.createTransport(
+    'smtps://raymondroid100%40gmail.com:raymond999@smtp.gmail.com'
+  );
+
+  const mailOptions = {
+    to: 'csechuan@gmail.com',
+    from: 'raymondroid100@gmail.com',
+    subject: 'Receipt',
+    html: '<b>Hello world 🐴</b>'
+  };
+
+  transporter.sendMail(mailOptions, err => {
+    if (err) {
+      console.log(err);
+    }
+  });
 
   // const input = req.body;
   //

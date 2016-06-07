@@ -25,8 +25,8 @@ router.get('/', function(req, res, next) {
   //   port: 465,
   //   secure: true, // use SSL
   //   auth: {
-  //     user: 'csechuan@gmail.com',
-  //     pass: 'Raymond1686'
+  //     user: '@gmail.com',
+  //     pass: ''
   //   }
   // };
   // var transporter = nodemailer.createTransport(smtpConfig);
