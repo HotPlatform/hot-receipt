@@ -1,0 +1,22 @@
+{
+  tag: 'bra_juwEhBi/delivery/20160601',
+  date: 20160601,
+  hours: [
+    {
+      hour: 0,
+      sales: 12000,
+      sales_amount: 24000,
+      sent: 10000,
+      sent_failed: 20
+    },
+    {
+      hour: 1,
+      sales: 12000,
+      sales_amount: 24000,
+      sent: 10000,
+      sent_failed: 20,
+      customer_new: 10000,
+      customer_repeat: 20
+    }
+  ]
+}

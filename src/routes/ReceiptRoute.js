@@ -2,60 +2,6 @@
 
 const nodemailer = require('nodemailer');
 
-const _receipt = {
-  customer: {
-    email: 'csechuan@gmail.com'
-  },
-  currency: 'myr',
-  amount: 999,
-  amount_returned: null,
-  invoice_number: 'inv_8MjIoe3ekbG8Pw',
-  invoice_timestamp: '2016-06-01T12:00:00Z',
-  status: 'canceled', // paid, canceled, fulfilled, returned
-  payments: [
-    {
-      currency: 'myr',
-      amount: 99,
-      source: 'cash', // cash, card
-      last4: null, // card ending number
-      status: 'paid' // paid, refunded, canceled
-    }
-  ],
-  items: [
-    {
-      currency: 'myr',
-      amount: 900,
-      description: null,
-      quantity: 2,
-      type: 'sku' // tax, shipping, sku, discount
-    }
-  ]
-};
-
-const _delivery = {
-  tag: 'bra_juwEhBi/delivery/20160601',
-  date: 20160601,
-  hours: [
-    {
-      hour: 0,
-      sales: 12000,
-      sales_amount: 24000,
-      sent: 10000,
-      sent_failed: 20
-    },
-    {
-      hour: 1,
-      sales: 12000,
-      sales_amount: 24000,
-      sent: 10000,
-      sent_failed: 20,
-      customer_new: 10000,
-      customer_repeat: 20
-    }
-  ]
-};
-
-
 export function create(req, res) {
   // TODO validate input
 
@@ -130,7 +76,7 @@ export function retrieve(req, res, next) {
 // const YearlyReporter  = require('../YearlyReporter');
 // const ReceiptPrinter  = require('../ReceiptPrinter');
   // const input = req.body;
-  //
+  // 
   // ReceiptManager.create(input).then(receipt => {
   //   // Statuses of parellel processes are ignorable.
   //   const promises = [];
@@ -155,3 +101,53 @@ export function retrieve(req, res, next) {
   //   promise.resolve();
   //   return promise;
   // }
+
+
+
+  // import moment from 'moment';
+
+  // factorise because metadata will be using same thing
+  // best to keep common var private
+  // function generateObjectId() {
+  //   /* generate id format: Date/Type/Batch e.g. 20160106/Receipt/0001 */
+  //   const today = moment().format('YYYYMMDD');
+  //   const type  = 'Receipt';
+  //   const batch = '0001'; // fixme: must check exist
+  //
+  //   let _objectId = [today, type, batch];
+  //   return _objectId.join('/');
+  // }
+
+  // export class ReceiptPrinter {
+  //   constructor() {
+  //
+  //   }
+  //
+  //   static validate(data) {
+  //
+  //   }
+  //
+  //   generateObjectId() {
+  //     /* generate id format: Date/Type/Batch e.g. 20160106/Receipt/0001 */
+  //
+  //     // TODO today is not defined <- must define in constructor first
+  //     this.today = moment().format('YYYYMMDD');
+  //     this.type  = 'Receipt';
+  //     this.batch = '0001'; // fixme: must check exist
+  //
+  //     let _objectId = [today, type, batch];
+  //     return _objectId.join('/');
+  //   }
+  //
+  //   generateMetadata() {
+  //     return {
+  //       today : this.today,
+  //       type: this.type,
+  //       batch: this.batch
+  //     }
+  //   }
+  //
+  // }
+  //
+  // export default ReceiptPrinter;
+  // module.exports = ReceiptPrinter;
