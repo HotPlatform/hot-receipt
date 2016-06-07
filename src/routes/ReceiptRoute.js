@@ -2,8 +2,69 @@
 
 const nodemailer = require('nodemailer');
 
+const _receipt = {
+  customer: {
+    email: 'csechuan@gmail.com'
+  },
+  currency: 'myr',
+  amount: 999,
+  amount_returned: null,
+  invoice_number: 'inv_8MjIoe3ekbG8Pw',
+  invoice_timestamp: '2016-06-01T12:00:00Z',
+  status: 'canceled', // paid, canceled, fulfilled, returned
+  payments: [
+    {
+      currency: 'myr',
+      amount: 99,
+      source: 'cash', // cash, card
+      last4: null, // card ending number
+      status: 'paid' // paid, refunded, canceled
+    }
+  ],
+  items: [
+    {
+      currency: 'myr',
+      amount: 900,
+      description: null,
+      quantity: 2,
+      type: 'sku' // tax, shipping, sku, discount
+    }
+  ]
+};
+
+const _delivery = {
+  tag: 'bra_juwEhBi/delivery/20160601',
+  date: 20160601,
+  hours: [
+    {
+      hour: 0,
+      sales: 12000,
+      sales_amount: 24000,
+      sent: 10000,
+      sent_failed: 20
+    },
+    {
+      hour: 1,
+      sales: 12000,
+      sales_amount: 24000,
+      sent: 10000,
+      sent_failed: 20,
+      customer_new: 10000,
+      customer_repeat: 20
+    }
+  ]
+};
+
+
 export function create(req, res) {
+  // TODO validate input
+
   const input = req.body;
+
+  // ========= Save receipt =============
+  const Receipt = Parse.Object.extend('Receipt');
+  const receipt = new Receipt();
+  receipt.save(input);
 
   // ========= Sending mail =============
   const transporter = nodemailer.createTransport(
@@ -22,6 +83,14 @@ export function create(req, res) {
       console.log(err);
     }
   });
+
+  // ========= Save delivery =============
+  const Delivery = Parse.Object.extend('Delivery');
+  const delivery = new Delivery();
+  delivery.save(input);
+
+  // TODO throw this
+  res.send('hello');
 }
 
 export function retrieve(req, res, next) {
@@ -79,3 +148,10 @@ export function retrieve(req, res, next) {
   //   // because parallel processes will not throw any errors.
   //   res.status(err.type).send(err.message);
   // });
+  //
+  // export function create(receipt) {
+  //   const promise = new Parse.Promise();
+  //   console.log('createDailyReport')
+  //   promise.resolve();
+  //   return promise;
+  // }
