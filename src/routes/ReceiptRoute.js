@@ -8,26 +8,31 @@ const MonthlyReporter = require('../MonthlyReporter');
 const YearlyReporter  = require('../YearlyReporter');
 const ReceiptPrinter  = require('../ReceiptPrinter');
 
-export function create(req, res, next) {
-  const input = req.body;
+import Postman from '../Postman';
 
-  ReceiptManager.create(input).then(receipt => {
-    // Statuses of parellel processes are ignorable.
-    const promises = [];
-    promises.push(HourlyReporter.create(input));
-    promises.push(DailyReporter.create(input));
-    promises.push(WeeklyReporter.create(input));
-    promises.push(MonthlyReporter.create(input));
-    promises.push(YearlyReporter.create(input));
-    promises.push(ReceiptPrinter.sendEmail(input));
-    return Parse.Promise.when(promises);
-  }).then(() => {
+export function create(req, res, next) {
+  const pm = new Postman();
+  pm.sayName();
+
+  // const input = req.body;
+  //
+  // ReceiptManager.create(input).then(receipt => {
+  //   // Statuses of parellel processes are ignorable.
+  //   const promises = [];
+  //   promises.push(HourlyReporter.create(input));
+  //   promises.push(DailyReporter.create(input));
+  //   promises.push(WeeklyReporter.create(input));
+  //   promises.push(MonthlyReporter.create(input));
+  //   promises.push(YearlyReporter.create(input));
+  //   promises.push(ReceiptPrinter.sendEmail(input));
+  //   return Parse.Promise.when(promises);
+  // }).then(() => {
     res.status(201).send('Created');
-  }, err => {
-    // This should handle the error of ReceiptManager.create()
-    // because parallel processes will not throw any errors.
-    res.status(err.type).send(err.message);
-  });
+  // }, err => {
+  //   // This should handle the error of ReceiptManager.create()
+  //   // because parallel processes will not throw any errors.
+  //   res.status(err.type).send(err.message);
+  // });
 }
 
 export function retrieve(req, res, next) {
